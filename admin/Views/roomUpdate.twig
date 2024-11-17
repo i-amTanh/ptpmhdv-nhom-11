@@ -1,0 +1,77 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start container-fluid -->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <h4 class="header-title mb-3">Sửa Thông Tin Phòng</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form method="post" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Resort_id</label>
+                            <div class="col-md-10">
+                                <input name="resort_id" type="text" class="form-control" value="{{ room.resort_id }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Room Type</label>
+                            <div class="col-md-10">
+                                <input name="room_type" type="text" class="form-control" value="{{ room.room_type }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Price Per Night</label>
+                            <div class="col-md-10">
+                                <input name="price_per_night" type="text" class="form-control" value="{{ room.price_per_night }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Availability</label>
+                            <div class="col-md-10">
+                                <input name="availability" type="text" class="form-control" value="{{ room.availability }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Max Occupancy</label>
+                            <div class="col-md-10">
+                                <input name="max_occupancy" type="text" class="form-control" value="{{ room.max_occupancy }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Description</label>
+                            <div class="col-md-10">
+                                <input name="description" type="text" class="form-control" value="{{ room.description }}" >
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Image</label>
+                            <div class="col-md-10">
+                                <input name="image" type="text" class="form-control" value="{{ room.image }}" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <img src="/images/{{ room.resort_id }}/{{ room.image }}" alt="{{ room.image }}" height="600" width="800">
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" >Xác nhận</button>
+                            <button type="submit"><a href="/admin/roombooking">Hủy</a></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+
+    </div>
+    <!-- end content -->
+{% endblock %}

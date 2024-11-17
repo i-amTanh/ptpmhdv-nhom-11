@@ -1,0 +1,67 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start container-fluid -->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <h4 class="header-title mb-3">Xem Chi Tiết Resort</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form method="post" action="" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">ResortName</label>
+                            <div class="col-md-10">
+                                <input name="resort_name" type="text" class="form-control" value="{{ resort.resort_name }}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Location</label>
+                            <div class="col-md-10">
+                                <input name="location" type="text" class="form-control" value="{{ resort.location }}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Description</label>
+                            <div class="col-md-10">
+                                <input name="description" type="text" class="form-control" value="{{ resort.description }}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Rating</label>
+                            <div class="col-md-10">
+                                <input name="rating" type="text" class="form-control" value="{{ resort.rating }}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Image</label>
+                            <div class="col-md-10">
+                                <input name="image" type="text" class="form-control" value="{{ resort.image }}" readonly>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <img src="/images/{{ resort.id }}/{{ resort.image }}" alt="{{ resort.image }}" height="600" width="800">
+                        </div>
+                        <div class="text-center mt-3">
+                            <form method="post" action="" class="form-horizontal">
+                                <button type="submit"> Chỉnh sửa</button>
+                            </form>
+                            <button type="submit"><a href="/admin/resort">Quay lại</a></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+
+    </div>
+    <!-- end content -->
+{% endblock %}

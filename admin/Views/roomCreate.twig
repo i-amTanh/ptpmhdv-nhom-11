@@ -1,0 +1,68 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start container-fluid -->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <h4 class="header-title mb-3">Thêm phòng mới</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <form method="post" class="form-horizontal">
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Resort_id</label>
+                            <div class="col-md-10">
+                                <input name="resort_id" type="text" class="form-control" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Room Type</label>
+                            <div class="col-md-10">
+                                <input name="room_type" type="text" class="form-control" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Price Per Night</label>
+                            <div class="col-md-10">
+                                <input name="price_per_night" type="text" class="form-control" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Availability</label>
+                            <div class="col-md-10">
+                                <input name="availability" type="text" class="form-control" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Max Occupancy</label>
+                            <div class="col-md-10">
+                                <input name="max_occupancy" type="text" class="form-control" value="" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-md-2 col-form-label">Description</label>
+                            <div class="col-md-10">
+                                <input name="description" type="text" class="form-control" value="" required>
+                            </div>
+                        </div>
+                        <div class="text-center mt-3">
+                            <button type="submit" >Thêm mới</button>
+                            <button><a href="/admin/room">Hủy</a></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+
+    </div>
+    <!-- end content -->
+{% endblock %}

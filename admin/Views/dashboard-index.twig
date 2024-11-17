@@ -1,0 +1,192 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    <!-- ============================================================== -->
+    <!-- Start Page Content here -->
+    <!-- ============================================================== -->
+
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start container-fluid -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <h4 class="header-title mb-3">Welcome Admin!</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="body" >
+                    <div class="dashboard-container" >
+                        <h1>Dashboard Quản Lý Đặt Phòng & Doanh Thu</h1>
+                        <div class="summary-box">
+                            <div class="box">
+                                <i class="fas fa-bed"></i> <!-- Biểu tượng phòng -->
+                                <h3>Tổng số đặt phòng hôm nay</h3>
+                                <p>{{ todayBookings }} phòng</p>
+                                <h3>Doanh thu hôm nay</h3>
+                                <p>{{ todayRevenue | number_format(0, ',', '.') }} VND</p>
+                            </div>
+                            <div class="box">
+                                <i class="fas fa-calendar-week"></i> <!-- Biểu tượng tuần -->
+                                <h3>Tổng số đặt phòng trong tuần</h3>
+                                <p>{{ weekBookings }} phòng</p>
+                                <h3>Doanh thu trong tuần</h3>
+                                <p>{{ weekRevenue | number_format(0, ',', '.') }} VND</p>
+                            </div>
+                            <div class="box">
+                                <i class="fas fa-calendar-alt"></i> <!-- Biểu tượng tháng -->
+                                <h3>Tổng số đặt phòng trong tháng</h3>
+                                <p>{{ monthBookings }} phòng</p>
+                                <h3>Doanh thu trong tháng</h3>
+                                <p>{{ monthRevenue | number_format(0, ',', '.') }} VND</p>
+                            </div>
+                        </div>
+
+                        <!-- Biểu đồ cho số lượng đặt phòng -->
+                        <div class="chart-container">
+                            <h3 class="text-center">Biểu đồ Theo Dõi Số Lượng Đặt Phòng</h3>
+                            <canvas id="bookingChart"></canvas>
+                        </div>
+
+                        <!-- Biểu đồ cho doanh thu -->
+                        <div class="chart-container">
+                            <h3 class="text-center" style="padding-top: 30px">Biểu đồ Tổng Quan Doanh Thu</h3>
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+
+                        <!-- Thêm thư viện Chart.js -->
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                        <!-- Thêm CDN FontAwesome cho biểu tượng -->
+                        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                        <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+                        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                        <script>
+                            // Biểu đồ cho số lượng đặt phòng
+                            var bookingCtx = document.getElementById('bookingChart').getContext('2d');
+                            var bookingChart = new Chart(bookingCtx, {
+                                type: 'bar',
+                                data: {
+                                    labels: ['Hôm nay', 'Tuần này', 'Tháng này'],
+                                    datasets: [{
+                                        label: 'Số lượng đặt phòng',
+                                        data: [{{ todayBookings }}, {{ weekBookings }}, {{ monthBookings }}],
+                                        backgroundColor: function(context) {
+                                            var chart = context.chart;
+                                            var ctx = chart.ctx;
+                                            var gradient = ctx.createLinearGradient(0, 0, 0, 400);
+                                            gradient.addColorStop(0, 'rgba(54, 162, 235, 0.6)');
+                                            gradient.addColorStop(1, 'rgba(54, 162, 235, 0.2)');
+                                            return gradient;
+                                        },
+                                        borderColor: 'rgba(54, 162, 235, 1)',
+                                        borderWidth: 1,
+                                        hoverBackgroundColor: 'rgba(54, 162, 235, 0.7)',
+                                        hoverBorderColor: 'rgba(54, 162, 235, 1)',
+                                        borderRadius: 8
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    animation: {
+                                        duration: 1500,
+                                        easing: 'easeOutBounce'
+                                    },
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                callback: function(value) { return value + ' phòng'; }
+                                            }
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            position: 'top',
+                                            labels: {
+                                                font: {
+                                                    size: 16,
+                                                    weight: 'bold'
+                                                },
+                                                boxWidth: 20
+                                            }
+                                        },
+                                        tooltip: {
+                                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                            bodyFont: { weight: 'bold', size: 14 },
+                                            titleFont: { size: 16 }
+                                        }
+                                    }
+                                }
+                            });
+
+                            // Biểu đồ cho doanh thu
+                            var revenueCtx = document.getElementById('revenueChart').getContext('2d');
+                            var revenueChart = new Chart(revenueCtx, {
+                                type: 'line',
+                                data: {
+                                    labels: ['Hôm nay', 'Tuần này', 'Tháng này'],
+                                    datasets: [{
+                                        label: 'Doanh thu',
+                                        data: [{{ todayRevenue }}, {{ weekRevenue }}, {{ monthRevenue }}],
+                                        fill: true,
+                                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                                        borderColor: 'rgba(75, 192, 192, 1)',
+                                        borderWidth: 2,
+                                        tension: 0.4,
+                                        pointRadius: 5,
+                                        pointBackgroundColor: 'rgba(75, 192, 192, 1)',
+                                        pointHoverRadius: 7,
+                                        pointHoverBackgroundColor: 'rgba(75, 192, 192, 1)',
+                                        pointHoverBorderColor: 'rgba(75, 192, 192, 1)',
+                                    }]
+                                },
+                                options: {
+                                    responsive: true,
+                                    animation: {
+                                        duration: 1500,
+                                        easing: 'easeOutBounce'
+                                    },
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            ticks: {
+                                                callback: function(value) { return value + ' VND'; }
+                                            }
+                                        }
+                                    },
+                                    plugins: {
+                                        legend: {
+                                            position: 'top',
+                                            labels: {
+                                                font: {
+                                                    size: 16,
+                                                    weight: 'bold'
+                                                },
+                                                boxWidth: 20
+                                            }
+                                        },
+                                        tooltip: {
+                                            backgroundColor: 'rgba(0, 0, 0, 0.7)',
+                                            bodyFont: { weight: 'bold', size: 14 },
+                                            titleFont: { size: 16 }
+                                        }
+                                    }
+                                }
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+            <!-- end row -->
+        </div>
+        <!-- end container-fluid -->
+
+    </div>
+    <!-- end content -->
+{% endblock %}

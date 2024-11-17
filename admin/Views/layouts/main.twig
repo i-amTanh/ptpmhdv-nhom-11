@@ -1,0 +1,217 @@
+{% include 'layouts/header.twig' %}
+
+<!-- Topbar Start -->
+<div class="navbar-custom">
+    <ul class="list-unstyled topnav-menu float-right mb-0">
+
+        <li class="dropdown d-none d-lg-block">
+            <a class="nav-link dropdown-toggle mr-0" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
+                <img src="/assets/images/flags/us.jpg" alt="user-image" class="mr-2" height="12"> <span
+                        class="align-middle">English <i class="mdi"></i> </span>
+            </a>
+        </li>
+
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
+                <i class="mdi mdi-bell noti-icon"></i>
+                <span class="badge badge-danger rounded-circle noti-icon-badge">0</span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right dropdown-lg">
+
+                <!-- item-->
+                <div class="dropdown-item noti-title">
+                    <h5 class="font-16 m-0">
+                                <span class="float-right">
+                                    <a href="#" class="text-dark">
+                                        <small>Clear All</small>
+                                    </a>
+                                </span>Notification
+                    </h5>
+                </div>
+
+                <div class="slimscroll noti-scroll">
+                    <!-- item-->
+                    <a href="javascript:void(0);" class="dropdown-item notify-item">
+                        <div class="notify-icon bg-info"><i class="mdi mdi-account-plus"></i></div>
+                        <p class="notify-details">New user registered.<small class="text-muted">5 hours
+                                ago</small></p>
+                    </a>
+                </div>
+
+                <!-- All-->
+                <a href="javascript:void(0);"
+                   class="dropdown-item text-primary text-center notify-item notify-all ">
+                    View all
+                    <i class="fi-arrow-right"></i>
+                </a>
+
+            </div>
+        </li>
+
+        <li class="dropdown notification-list">
+            <a class="nav-link dropdown-toggle nav-user mr-0" data-toggle="dropdown" href="#" role="button"
+               aria-haspopup="false" aria-expanded="false">
+                <img src="/assets/images/users/white-avatar.jpg" alt="user-image" class="rounded-circle">
+                <span class="pro-user-name ml-1">
+                            {{ user }} <i class="mdi mdi-chevron-down"></i>
+                        </span>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right profile-dropdown ">
+                <!-- item-->
+                <div class="dropdown-header noti-title">
+                    <h6 class="text-overflow m-0">Welcome !</h6>
+                </div>
+
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <i class="mdi mdi-account-outline"></i>
+                    <span>Profile</span>
+                </a>
+
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <i class="mdi mdi-settings-outline"></i>
+                    <span>Settings</span>
+                </a>
+
+                <!-- item-->
+                <a href="javascript:void(0);" class="dropdown-item notify-item">
+                    <i class="mdi mdi-lock-outline"></i>
+                    <span>Lock Screen</span>
+                </a>
+
+                <div class="dropdown-divider"></div>
+
+                <!-- item-->
+                <a href="/auth/logout" class="dropdown-item notify-item">
+                    <i class="mdi mdi-logout-variant"></i>
+                    <span>Logout</span>
+                </a>
+
+            </div>
+        </li>
+
+    </ul>
+
+    <!-- LOGO -->
+    <div class="logo-box">
+        <a href="/" class="logo text-center logo-dark">
+                    <span class="logo-lg">
+                        <h1>Admin</h1>
+                    </span>
+        </a>
+    </div>
+
+    <ul class="list-unstyled topnav-menu topnav-menu-left m-0">
+
+        <li class="d-none d-sm-block">
+            <form class="app-search">
+                <div class="app-search-box">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search...">
+                        <div class="input-group-append">
+                            <button class="btn" type="submit">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </li>
+    </ul>
+</div>
+<!-- end Topbar --> <!-- ========== Left Sidebar Start ========== -->
+<div class="left-side-menu">
+
+    <div class="user-box">
+        <div class="float-left">
+            <img src="/assets/images/users/white-avatar.jpg" alt="" class="avatar-md rounded-circle">
+        </div>
+        <div class="user-info">
+            <a href="#">{{ user }}</a>
+            <p class="text-muted m-0">{{ user_flag }}</p>
+        </div>
+    </div>
+
+    <!--- Sidemenu -->
+    <div id="sidebar-menu">
+
+        <ul class="metismenu" id="side-menu">
+
+            <li class="menu-title">Navigation</li>
+
+            <li>
+                <a href="/admin">
+                    <i class="ti-home"></i>
+                    <span> Dashboard </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/resort">
+                    <i class="fa-solid fa-hotel"></i>
+                    <span> Quản Lý Resort </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/room">
+                    <i class="fa-solid fa-house"></i>
+                    <span> Quản Lý Phòng </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/customer">
+                    <i class="fa-solid fa-person"></i>
+                    <span> Quản Lý Khách Hàng </span>
+                </a>
+            </li>
+
+{#            <li>#}
+{#                <a href="/admin">#}
+{#                    <i class="fa-brands fa-servicestack"></i>#}
+{#                    <span> Quản Lý Dịch Vụ </span>#}
+{#                </a>#}
+{#            </li>#}
+
+            <li>
+                <a href="/admin/employee">
+                    <i class="fa-solid fa-user"></i>
+                    <span> Quản Lý Nhân Viên </span>
+                </a>
+            </li>
+
+            <li>
+                <a href="/admin/roombooking">
+                    <i class="fa-regular fa-clipboard"></i>
+                    <span> Quản Lý Đặt Phòng </span>
+                </a>
+            </li>
+
+{#            <li>#}
+{#                <a href="/admin">#}
+{#                    <i class="fa-sharp fa-solid fa-chart-simple"></i>#}
+{#                    <span> Thống Kê </span>#}
+{#                </a>#}
+{#            </li>#}
+        </ul>
+
+    </div>
+    <!-- End Sidebar -->
+
+    <div class="clearfix"></div>
+
+
+</div>
+<!-- Left Sidebar End -->
+
+<!-- ============================================================== -->
+<!-- Start Page Content here -->
+<!-- ============================================================== -->
+
+{% block content %}{% endblock %}
+
+{% include 'layouts/footer.twig' %}

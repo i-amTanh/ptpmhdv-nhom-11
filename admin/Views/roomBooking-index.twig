@@ -1,0 +1,68 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+    <div class="content-page">
+        <div class="content">
+
+            <!-- Start container-fluid -->
+            <div class="container-fluid">
+
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <h4 class="header-title mb-3">Danh sách Đặt Phòng</h4>
+                        </div>
+                    </div>
+                </div>
+                <div id="selection-datatable" class="table table-striped table-bordered dt-responsive nowrap"
+                     style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                    <div class="table-responsive">
+                        <table class="table table-hover m-0">
+                            <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Customer ID</th>
+                                <th>Room ID</th>
+                                <th>Check in Date</th>
+                                <th>Checkout Date</th>
+                                <th>Status</th>
+                                <th>Total Amount</th>
+                                <th></th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for roomBooking in roomBookings %}
+                                <tr>
+                                    <td>{{ roomBooking.id }}</td>
+                                    <td>{{ roomBooking.customer_id }}</td>
+                                    <td>{{ roomBooking.room_id }}</td>
+                                    <td>{{ roomBooking.check_in_date }}</td>
+                                    <td>{{ roomBooking.check_out_date }}</td>
+                                    <td>{{ roomBooking.status }}</td>
+                                    <td>{{ roomBooking.total_amount }}</td>
+                                    <td>
+                                        <a href="/admin/roombooking/update/{{ roomBooking.id }}" title="Chỉnh sửa"><i class="fa fa-pen"></i> </a>
+                                        <form method="POST" id="delete-form-{{ roomBooking.id }}">
+                                            <input type="hidden" value="{{ roomBooking.id }}" name="id">
+                                            <a href="#" title="Xóa {{ roomBooking.id }}" onclick="document.getElementById('delete-form-{{ roomBooking.id }}').submit();" ><i class="fa fa-trash"></i></a>
+                                            <noscript>
+                                                <input type="submit" value="Submit form!">
+                                            </noscript>
+                                        </form>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <!-- end row -->
+            </div>
+            <!-- end container-fluid -->
+
+        </div>
+        <!-- end content -->
+
+    </div>
+    <!-- END content-page -->
+{% endblock %}
