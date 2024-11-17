@@ -30,6 +30,7 @@ class Resort extends BaseController {
                 'location'         => $this->request->getPost('location'),
                 'description'      => $this->request->getPost('description'),
                 'rating'           => $this->request->getPost('rating'),
+                'image'             => $this->request->getPost('image'),
             ];
 
             if ($model->insert($data)) {
@@ -58,6 +59,7 @@ class Resort extends BaseController {
                 'location'         => $this->request->getPost('location'),
                 'description'      => $this->request->getPost('description'),
                 'rating'           => $this->request->getPost('rating'),
+                'image'             => $this->request->getPost('image'),
             ];
 
             if ($model->update($id, $data)) {

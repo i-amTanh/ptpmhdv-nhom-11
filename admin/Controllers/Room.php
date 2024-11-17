@@ -9,23 +9,11 @@ use CodeIgniter\Config\Services;
 class Room extends BaseController {
     public function roomIndex(): string
     {
-        // Lấy số trang từ URL
-        $pager = Services::pager();
-
-        // Tạo model để truy xuất dữ liệu
-        $roomModel = new RoomModel();
-
-        // Số bản ghi mỗi trang
-        $perPage = 10;
-
-        // Lấy danh sách phòng từ database và phân trang
-        $rooms = $roomModel->paginate($perPage, 'default', $this->request->getVar('page'));
-//        $model = new RoomModel();
-//        $rooms = $model->findAll();
+        $model = new RoomModel();
+        $rooms = $model->findAll();
         $data = [
             'title' => 'Admin',
             'rooms' => $rooms,
-            'pager' => $pager,
         ];
         return $this->render('room-index',$data);
     }
@@ -45,6 +33,7 @@ class Room extends BaseController {
                 'availability'  => $this->request->getPost('availability'),
                 'max_occupancy'  => $this->request->getPost('max_occupancy'),
                 'description'     => $this->request->getPost('description'),
+                'image'             => $this->request->getPost('image'),
             ];
 
             if ($model->insert($data)) {
@@ -75,6 +64,7 @@ class Room extends BaseController {
                 'availability'  => $this->request->getPost('availability'),
                 'max_occupancy'  => $this->request->getPost('max_occupancy'),
                 'description'     => $this->request->getPost('description'),
+                'image'             => $this->request->getPost('image'),
             ];
 
             if ($model->update($id, $data)) {
