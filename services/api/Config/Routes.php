@@ -16,7 +16,7 @@ $routes->group('api', static function ($routes) {
         $routes->get('show/(:num)', [Resort::class, 'show/$1']);
         $routes->post('create', [Resort::class, 'create']);
         $routes->post('update/(:num)', [Resort::class, 'update/$1']);
-        $routes->get('delete/(:num)', [Resort::class, 'delete/$1']);
+        $routes->post('delete/(:num)', [Resort::class, 'delete/$1']);
     });
 
     $routes->group('customer', static function ($routes) {
@@ -32,7 +32,7 @@ $routes->group('api', static function ($routes) {
         $routes->get('show/(:num)', [Employee::class, 'show/$1']);
         $routes->post('create', [Employee::class, 'create']);
         $routes->post('update/(:num)', [Employee::class, 'update/$1']);
-        $routes->get('delete/(:num)', [Employee::class, 'delete/$1']);
+        $routes->post('delete/(:num)', [Employee::class, 'delete/$1']);
     });
 
     $routes->group('room', static function ($routes) {
@@ -40,7 +40,8 @@ $routes->group('api', static function ($routes) {
         $routes->get('show/(:num)', [Room::class, 'show/$1']);
         $routes->post('create', [Room::class, 'create']);
         $routes->post('update/(:num)', [Room::class, 'update/$1']);
-        $routes->get('delete/(:num)', [Room::class, 'delete/$1']);
+        $routes->post('delete/(:num)', [Room::class, 'delete/$1']);
+        $routes->get('getroomsbyresortid/(:num)', [Room::class, 'getRoomByResortId/$1']);
     });
 
     $routes->group('roombooking', static function ($routes) {
@@ -48,6 +49,6 @@ $routes->group('api', static function ($routes) {
         $routes->get('show/(:num)', [RoomBooking::class, 'show/$1']);
         $routes->post('create', [RoomBooking::class, 'create']);
         $routes->post('update/(:num)', [RoomBooking::class, 'update/$1']);
-        $routes->get('delete/(:num)', [RoomBooking::class, 'delete/$1']);
+        $routes->post('delete/(:num)', [RoomBooking::class, 'delete/$1']);
     });
 });

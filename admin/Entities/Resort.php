@@ -12,6 +12,7 @@ class Resort extends Entity {
         'description'   => null,
         'rating'        => null,
         'image'         => null,
+        'price_per_night' => null,
     ];
 
 

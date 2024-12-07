@@ -13,6 +13,9 @@ class Resort extends RestControllers
 
     public function show($id = null)
     {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
         $data = $this->model->find($id);
         if (! $data) {
             return $this->failNotFound('Resort not found');
@@ -33,6 +36,9 @@ class Resort extends RestControllers
 
     public function update($id = null)
     {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
         $data = $this->request->getRawInput();
         if (! $this->model->update($id, $data)) {
             return $this->failValidationErrors($this->model->errors());
@@ -43,10 +49,14 @@ class Resort extends RestControllers
 
     public function delete($id = null)
     {
-        if (! $this->model->delete($id)) {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
+        $data = $this->model->find($id);
+        if (!$data) {
             return $this->failNotFound('Resort not found');
         }
-
+        $this->model->delete($id);
         return $this->respondDeleted('Resort deleted');
     }
 }

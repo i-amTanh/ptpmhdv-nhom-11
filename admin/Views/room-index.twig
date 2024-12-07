@@ -35,7 +35,7 @@
                                     <td>{{ room.id }}</td>
                                     <td>{{ room.resort_id }}</td>
                                     <td>{{ room.room_type }}</td>
-                                    <td>{{ room.price_per_night }}</td>
+                                    <td>{{ room.price_per_night | number_format(0, ',', '.') }} VND</td>
                                     <td>{{ room.availability }}</td>
                                     <td>{{ room.max_occupancy }}</td>
                                     <td>

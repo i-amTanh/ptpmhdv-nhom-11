@@ -17,13 +17,14 @@
                 <div id="selection-datatable" class="table table-striped table-bordered dt-responsive nowrap"
                      style="border-collapse: collapse; border-spacing: 0; width: 100%;">
                     <div class="table-responsive">
-                        <table class="table table-hover m-0">
+                        <table class="table table-hover m-0" >
                             <thead>
                             <tr>
                                 <th>ID</th>
                                 <th>ResortName</th>
                                 <th>Description</th>
                                 <th>Rating</th>
+                                <th>Price Per Night</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -34,6 +35,7 @@
                                     <td>{{ resort.resort_name }}</td>
                                     <td>{{ resort.description }}</td>
                                     <td>{{ resort.rating }}</td>
+                                    <td>{{ resort.price_per_night | number_format(0, ',', '.') }} VND</td>
                                     <td>
                                         <a href="/admin/resort/view/{{ resort.id }}" title="Xem chi tiết"><i class="fa fa-eye"></i> </a>
                                         <a href="/admin/resort/update/{{ resort.id }}" title="Chỉnh sửa"><i class="fa fa-pen"></i> </a>
@@ -63,4 +65,7 @@
 
     </div>
     <!-- END content-page -->
+
+
+
 {% endblock %}

@@ -2,8 +2,6 @@
 
 namespace Api\Controllers;
 
-use CodeIgniter\Database\Exceptions\DataException;
-
 class Customer extends RestControllers
 {
     protected $modelName = 'Admin\Models\CustomerModel';
@@ -15,11 +13,13 @@ class Customer extends RestControllers
 
     public function show($id = null)
     {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
         $data = $this->model->find($id);
-        if (! $data) {
+        if (!$data) {
             return $this->failNotFound('Customer not found');
         }
-
         return $this->respond($data);
     }
 
@@ -35,8 +35,14 @@ class Customer extends RestControllers
 
     public function update($id = null)
     {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
         $data = $this->request->getPost();
-        if (!$this->model->update($id, $data)) {
+        if (! $this->model->find($id)) {
+            return $this->failNotFound('Customer not found');
+        }
+        if (! $this->model->update($id, $data)) {
             return $this->failValidationErrors($this->model->errors());
         }
 
@@ -45,10 +51,14 @@ class Customer extends RestControllers
 
     public function delete($id = null)
     {
-        if (!$this->model->delete($id)) {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
+        $data = $this->model->find($id);
+        if (!$data) {
             return $this->failNotFound('Customer not found');
         }
-
+        $this->model->delete($id);
         return $this->respondDeleted('Customer deleted');
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Admin\Controllers;
+namespace Web\Controllers;
 
 use App\Controllers\BaseController as Controller;
 
@@ -36,7 +36,7 @@ abstract class BaseController extends Controller
      * @see https://twig.symfony.com/doc/3.x/api.html#environment-options
      */
     protected array $twigConfig = [
-        'paths' => [ADMIN_PATH . 'Views'],
+        'paths' => [WEB_PATH . 'Views'],
 
     ];
 }

@@ -53,4 +53,10 @@ class RoomModel extends Model {
 //            'alpha_numeric_space' => 'Description must be alphanumeric and space-separated.',
 //        ],
     ];
+
+    public function getRoomsByResortId($resortId)
+    {
+        return $this->where('resort_id', $resortId)->findAll();
+    }
+
 }

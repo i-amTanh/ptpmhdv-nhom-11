@@ -18,6 +18,7 @@ defined('AUTH_NAMESPACE') || define('AUTH_NAMESPACE', 'Auth');
 defined('ADMIN_NAMESPACE') || define('ADMIN_NAMESPACE', 'Admin');
 defined('CLIENT_NAMESPACE')  || define('CLIENT_NAMESPACE', 'Client');
 defined('API_NAMESPACE')     || define('API_NAMESPACE', 'Api');
+defined('WEB_NAMESPACE')     || define('WEB_NAMESPACE', 'Web');
 
 /*
  | --------------------------------------------------------------------
@@ -30,6 +31,7 @@ defined('AUTH_PATH') || define('AUTH_PATH', ROOTPATH . '/authentication/');
 defined('ADMIN_PATH') || define('ADMIN_PATH', ROOTPATH . '/admin/');
 defined('API_PATH')     || define('API_PATH', ROOTPATH . '/services/api/');
 defined('CLIENT_PATH')  || define('CLIENT_PATH', ROOTPATH . '/services/clients/');
+defined('WEB_PATH')     || define('WEB_PATH', ROOTPATH . '/web/');
 
 
 /*

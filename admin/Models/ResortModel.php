@@ -16,6 +16,7 @@ class ResortModel extends Model {
         'description',
         'rating',
         'image',
+        'price_per_night',
     ];
 
 }

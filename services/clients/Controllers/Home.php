@@ -2,7 +2,6 @@
 
 namespace Client\Controllers;
 
-use CodeIgniter\Controller;
 use CodeIgniter\HTTP\ResponseInterface;
 
 class Home extends BaseController

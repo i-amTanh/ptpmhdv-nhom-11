@@ -39,7 +39,7 @@ class Room extends ResourceController
         }
     }
 
-    public function update($id)
+    public function update($id = null)
     {
         $input = $this->request->getPost();
 
@@ -65,7 +65,7 @@ class Room extends ResourceController
         }
     }
 
-    public function delete($id)
+    public function delete($id = null)
     {
         $roomModel = new RoomModel();
 
@@ -82,7 +82,7 @@ class Room extends ResourceController
         }
     }
 
-    public function show($id)
+    public function show($id = null)
     {
         $roomModel = new RoomModel();
         $room = $roomModel->find($id);

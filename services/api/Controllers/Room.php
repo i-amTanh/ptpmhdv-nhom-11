@@ -2,6 +2,8 @@
 
 namespace Api\Controllers;
 
+use Admin\Models\RoomModel;
+
 class Room extends RestControllers
 {
     protected $modelName = 'Admin\Models\RoomModel';
@@ -13,6 +15,9 @@ class Room extends RestControllers
 
     public function show($id = null)
     {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
         $data = $this->model->find($id);
         if (! $data) {
             return $this->failNotFound('Room not found');
@@ -33,6 +38,9 @@ class Room extends RestControllers
 
     public function update($id = null)
     {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
         $data = $this->request->getRawInput();
         if (! $this->model->update($id, $data)) {
             return $this->failValidationErrors($this->model->errors());
@@ -43,10 +51,29 @@ class Room extends RestControllers
 
     public function delete($id = null)
     {
-        if (! $this->model->delete($id)) {
+
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
+        $data = $this->model->find($id);
+        if (!$data) {
             return $this->failNotFound('Room not found');
         }
-
+        $this->model->delete($id);
         return $this->respondDeleted('Room deleted');
     }
+
+    public function getRoomByResortId($id = null)
+    {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
+        $model = new RoomModel();
+        $data = $model->getRoomsByResortId($id);
+        if (! $data) {
+            return $this->failNotFound('Room not found');
+        }
+        return $this->respond($data);
+    }
+
 }
