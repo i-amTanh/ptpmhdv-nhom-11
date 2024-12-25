@@ -1,0 +1,59 @@
+{% extends 'layouts/main.twig' %}
+
+{% block content %}
+
+    <section class="layout-pt-md layout-pb-lg">
+        <div class="container">
+            <div class="row y-gap-30">
+                <div class="col-xl-12 col-lg-12">
+                    <div class="row y-gap-10 items-center justify-between" >
+                        <div class="card-hotel-header">
+                            <h1 class="title-label">History Booking</h1>
+                            <ul class="nav nav-tabs tabs-hotel">
+                                <li class="nav-item" style="margin-right:30px!important;">
+                                    <a href="/vi" id="des-tab" class="active"></a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+
+                    <div class="mt-30"></div>
+                        <div id="selection-datatable" class="table table-striped table-bordered dt-responsive nowrap"
+                             style="border-collapse: collapse; border-spacing: 0; width: 100%;">
+                            <div class="table-responsive">
+                                <table class="table table-hover m-0" id="datatable">
+                                    <thead>
+                                    <tr>
+                                        <th>Resort Name</th>
+                                        <th>Room ID</th>
+                                        <th>Room Name</th>
+                                        <th>Check in Date</th>
+                                        <th>Checkout Date</th>
+                                        <th>Status</th>
+                                        <th>Total Amount</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for roomBooking in roomBooking %}
+                                        <tr>
+                                            <td>{{ resortNames[loop.index0] }}</td>
+                                            <td>{{ roomBooking.room_id }}</td>
+                                            <td>{{ roomNames[loop.index0] }}</td>
+                                            <td>{{ roomBooking.check_in_date }}</td>
+                                            <td>{{ roomBooking.check_out_date }}</td>
+                                            <td>{{ roomBooking.status }}</td>
+                                            <td>{{ roomBooking.total_amount | number_format(0, ',', '.') }} VND</td>
+                                        </tr>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

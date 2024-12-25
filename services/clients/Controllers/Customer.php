@@ -2,7 +2,7 @@
 
 namespace Client\Controllers;
 
-use Admin\Models\CustomerModel;
+use Admin\Models\AccountModel;
 use CodeIgniter\RESTful\ResourceController;
 use CodeIgniter\API\ResponseTrait;
 
@@ -20,7 +20,7 @@ class Customer extends ResourceController
         }
 
         // Save customer data
-        $customerModel = new CustomerModel();
+        $customerModel = new AccountModel();
         $data = [
             'customer_name' => $input['customer_name'],
             'phone_number' => $input['phone_number'],
@@ -43,7 +43,7 @@ class Customer extends ResourceController
             return $this->failValidationError('Invalid input');
         }
 
-        $customerModel = new CustomerModel();
+        $customerModel = new AccountModel();
         $data = [
             'customer_name' => $input['customer_name'],
             'phone_number' => $input['phone_number'],
@@ -61,12 +61,12 @@ class Customer extends ResourceController
 
     public function delete($id)
     {
-        $customerModel = new CustomerModel();
+        $customerModel = new AccountModel();
 
         // Kiểm tra xem customer có tồn tại không
         $customer = $customerModel->find($id);
         if (!$customer) {
-            return $this->failNotFound('Customer not found');
+            return $this->failNotFound('Account not found');
         }
 
         if ($customerModel->delete($id)) {
@@ -78,13 +78,13 @@ class Customer extends ResourceController
 
     public function show($id)
     {
-        $customerModel = new CustomerModel();
+        $customerModel = new AccountModel();
         $customer = $customerModel->find($id);
 
         if ($customer) {
             return $this->respond($customer);
         } else {
-            return $this->failNotFound('Customer not found');
+            return $this->failNotFound('Account not found');
         }
     }
 

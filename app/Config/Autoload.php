@@ -45,6 +45,7 @@ class Autoload extends AutoloadConfig
         API_NAMESPACE     => ROOTPATH . 'services/api',
         CLIENT_NAMESPACE  => ROOTPATH . 'services/clients',
         WEB_NAMESPACE      => ROOTPATH . 'web',
+        AUTH_NAMESPACE     => ROOTPATH . 'authentication',
     ];
 
     /**

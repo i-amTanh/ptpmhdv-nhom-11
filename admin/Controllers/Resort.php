@@ -31,6 +31,7 @@ class Resort extends BaseController {
                 'description'      => $this->request->getPost('description'),
                 'rating'           => $this->request->getPost('rating'),
                 'image'             => $this->request->getPost('image'),
+                'price_per_night'   => $this->request->getPost('price_per_night'),
             ];
 
             if ($model->insert($data)) {
@@ -60,6 +61,7 @@ class Resort extends BaseController {
                 'description'      => $this->request->getPost('description'),
                 'rating'           => $this->request->getPost('rating'),
                 'image'             => $this->request->getPost('image'),
+                'price_per_night'   => $this->request->getPost('price_per_night'),
             ];
 
             if ($model->update($id, $data)) {

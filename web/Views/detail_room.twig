@@ -11,7 +11,7 @@
                             <h1 class="title-label">Room categories</h1>
                             <ul class="nav nav-tabs tabs-hotel">
                                 <li class="nav-item" style="margin-right:30px!important;">
-                                    <a href="/vi" id="des-tab" class="active">Điểm đến</a>
+                                    <a href="/vi" id="des-tab" class="active"></a>
                                 </li>
                             </ul>
                         </div>
@@ -40,7 +40,7 @@
                                                 </h3>
                                             <div class="row x-gap-10 y-gap-10 items-center pt-10">
                                                 <div class="col-auto">
-                                                    <p class="text-18">Max Occupancy: {{ room.max_occupancy }}</p>
+                                                    <p class="text-17"> <img class="mr-2" src="/images/people.svg"> Max Occupancy: {{ room.max_occupancy }}</p>
                                                 </div>
                                             </div>
 
@@ -79,9 +79,15 @@
                                                 <div class="text-14 text-light-1 mt-5">One Night</div>
 
 
-                                                <a href="#" class="button -md -dark-1 bg-blue-1 text-white mt-24">
-                                                    BooK Now
-                                                </a>
+                                                {% if session.user %}
+                                                    <a href="/vi/booking/{{ room.resort_id }}" class="button -md -dark-1 bg-blue-1 text-white mt-24">
+                                                        BooK Now
+                                                    </a>
+                                                {% else %}
+                                                    <a href="/auth/login" class="button -md -dark-1 bg-blue-1 text-white mt-24">
+                                                        BooK Now
+                                                    </a>
+                                                {% endif %}
 
                                             </div>
                                         </div>

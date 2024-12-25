@@ -2,6 +2,8 @@
 
 namespace Api\Controllers;
 
+use Admin\Models\RoomBookingModel;
+
 class RoomBooking extends RestControllers
 {
     protected $modelName = 'Admin\Models\RoomBookingModel';
@@ -59,4 +61,18 @@ class RoomBooking extends RestControllers
         $this->model->delete($id);
         return $this->respondDeleted('RoomBooking deleted');
     }
+
+    public function getRoomBookingByCustomerId($id = null)
+    {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
+        $model = new RoomBookingModel();
+        $data = $model->getRoomBookingByCustomerId($id);
+        if (! $data) {
+            return $this->failNotFound('Room not found');
+        }
+        return $this->respond($data);
+    }
+
 }

@@ -10,15 +10,19 @@ class Auth extends BaseController
     public function login(): ResponseInterface|string
     {
         if (session()->get('user')) {
-            return $this->response->redirect('/');
+            return $this->response->redirect('/vi');
         }
         if ($this->request->getMethod() === 'POST') {
             $form           = new AuthLib();
-            $form->username = $this->request->getVar('username');
+            $form->email = $this->request->getVar('email');
             $form->password = $this->request->getVar('password');
 
             if ($form->login()) {
-                return $this->response->redirect('/');
+                return $this->response->redirect('/vi');
+            } else {
+                echo '<script>
+                    alert("Email or password is incorrect!");
+                  </script>';
             }
         }
 

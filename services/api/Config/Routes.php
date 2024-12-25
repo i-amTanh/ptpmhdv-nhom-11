@@ -38,6 +38,7 @@ $routes->group('api', static function ($routes) {
     $routes->group('room', static function ($routes) {
         $routes->get('/', [Room::class, 'index']);
         $routes->get('show/(:num)', [Room::class, 'show/$1']);
+        $routes->get('getroomprice/(:num)', [Room::class, 'getRoomPrice/$1']);
         $routes->post('create', [Room::class, 'create']);
         $routes->post('update/(:num)', [Room::class, 'update/$1']);
         $routes->post('delete/(:num)', [Room::class, 'delete/$1']);
@@ -50,5 +51,6 @@ $routes->group('api', static function ($routes) {
         $routes->post('create', [RoomBooking::class, 'create']);
         $routes->post('update/(:num)', [RoomBooking::class, 'update/$1']);
         $routes->post('delete/(:num)', [RoomBooking::class, 'delete/$1']);
+        $routes->get('getroombookingbycustomerid/(:num)', [RoomBooking::class, 'getRoomBookingByCustomerId/$1']);
     });
 });

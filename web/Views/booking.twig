@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Booking</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Add some padding to the container */
+        .container {
+            padding: 30px;
+        }
+
+        /* Enhance the appearance of cards */
+        .card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        /* Make images more stylish and consistent */
+        .card-img-top {
+            border-radius: 10px 10px 0 0;
+        }
+
+        /* Styling for room options */
+        .room-option {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .room-option img {
+            border-radius: 10px;
+        }
+
+        .btn-outline-primary {
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+
+        .btn-primary {
+            border-radius: 20px;
+            padding: 10px 20px;
+        }
+
+        /* Style for journey card */
+        .journey-card {
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* Typography adjustments */
+        h5 {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1rem;
+        }
+
+        .input-date {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function selectRoom(roomId) {
+            // Xóa lớp 'selected' khỏi tất cả các giá phòng
+            $('.room-price').removeClass('selected');
+
+            // Thêm lớp 'selected' vào giá phòng của phòng đã chọn
+            $('#room-price-' + roomId).addClass('selected');
+
+            // Cập nhật giá trị cho input ẩn room_id
+            $('#room_id').val(roomId);
+
+            // Gọi hàm updatePrice để lấy và hiển thị giá phòng đã cập nhật
+            updatePrice(roomId);
+        }
+
+        function updatePrice(roomId) {
+            $.ajax({
+                url: 'http://pmhdv.local/api/room/getroomprice/' + roomId,
+                type: 'GET',
+                success: function(response) {
+
+                    let roomPrice = response;
+
+                    // Cập nhật giá của phòng đã chọn
+                    $('#room-price-' + roomId).text(roomPrice.toLocaleString() + ' VND');
+
+                    // Cập nhật giá tổng dựa trên phòng đã chọn
+                    updateTotalPrice();
+                },
+                error: function() {
+                    alert('Lỗi khi lấy giá phòng');
+                }
+            });
+        }
+
+
+        function updateTotalPrice() {
+            // Lấy giá của phòng đã chọn
+            let roomPriceText = $('.room-price.selected').text();
+            let roomPrice = parseInt(roomPriceText.replace(' VND', '').replace(',', ''), 10);
+
+            // Kiểm tra xem giá phòng có hợp lệ không
+            if (isNaN(roomPrice) || roomPrice <= 0) {
+                $('#total-price').text('0 VND');
+                $('#total-price-hidden').val('0');
+                return;
+            }
+
+            // Lấy ngày check-in và check-out
+            let checkInDate = $('#check-in').val();
+            let checkOutDate = $('#check-out').val();
+
+            // Kiểm tra nếu cả hai ngày đều được chọn
+            if (checkInDate && checkOutDate) {
+                let checkIn = new Date(checkInDate);
+                let checkOut = new Date(checkOutDate);
+
+                // Đảm bảo ngày trả phòng phải sau ngày nhận phòng
+                if (checkOut <= checkIn) {
+                    $('#total-price').text('0 VND');
+                    $('#total-price-hidden').val('0');
+                    return;
+                }
+
+                // Tính số ngày giữa check-in và check-out
+                let timeDiff = checkOut - checkIn;
+                let numOfDays = timeDiff / (1000 * 3600 * 24); // Chuyển từ milliseconds sang ngày
+
+                // Nếu số ngày hợp lệ (>= 1), tính tổng giá
+                if (numOfDays >= 1) {
+                    let totalPrice = numOfDays * roomPrice;
+
+                    // Hiển thị tổng giá
+                    $('#total-price').text(totalPrice.toLocaleString() + ' VND');
+
+                    // Cập nhật giá trị cho thẻ ẩn
+                    $('#total-price-hidden').val(totalPrice);
+                } else {
+                    $('#total-price').text('0 VND');
+                    $('#total-price-hidden').val('0');
+                }
+            } else {
+                $('#total-price').text('0 VND');
+                $('#total-price-hidden').val('0');
+            }
+        }
+
+
+
+    </script>
+</head>
+<body>
+<div class="container my-5">
+    <h1 class="text-center mb-5">Room Booking</h1>
+    <!-- Hotel Information -->
+    <div class="card mb-4">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="/images/{{ resort.id }}/{{ resort.image }}" alt="{{ resort.image }}" class="img-fluid w-100 h-100 card-img-top">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">{{ resort.resort_name }}</h5>
+                    <p class="card-text">{{ resort.description }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room Options -->
+    <div class="row">
+        <div class="col-lg-8">
+            {% for room in rooms %}
+                <div class="room-option row mb-3">
+                    <div class="col-md-4">
+                        <img src="/images/{{ room.resort_id }}/{{ room.image }}" alt="{{ room.image }}" class="img-fluid w-100 h-100">
+                    </div>
+                    <div class="col-md-8">
+                        <h5>{{ room.room_type }}</h5>
+                        <p><img class="mr-2" src="/images/people.svg"> {{ room.max_occupancy }}</p>
+                        <p><strong>Price Per Night: <span id="room-price-{{ room.id }}" class="room-price">{{ room.price_per_night | number_format(0, ',', '.') }}</span> VND</strong></p>
+                        <button class="btn btn-outline-primary" onclick="selectRoom({{ room.id }})">Chọn</button>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <!-- Journey Information -->
+        <div class="col-lg-4">
+            <form method="POST" action="/vi/booking/{{ resort.id }}" id="booking-form" class="booking-form">
+            <div class="journey-card card">
+                <div class="card-body">
+                    <h5 class="card-title">Chuyến đi</h5>
+                    <p>{{ resort.resort_name }}</p>
+                    <!-- Thêm các trường nhập ngày -->
+                    <div class="mb-3">
+                        <label for="check-in" class="form-label">Check in date:</label>
+                        <input type="date" name="check-in-date" id="check-in" class="form-control" value="">
+                    </div>
+                    <div class="mb-3">
+                        <label for="check-out" class="form-label">Check out date:</label>
+                        <input type="date" name="check-out-date" id="check-out" class="form-control" value="">
+                    </div>
+                     <input type="hidden" name="room_id" id="room_id" value="">
+                    <p><strong>Tổng giá: <span id="total-price">0 VND</span></strong></p>
+                    <input type="hidden" name="total-price" id="total-price-hidden" value="">
+                    <button type="submit" name="redirect" class="btn btn-primary w-100" id="continue-btn">Tiếp tục</button>
+                </div>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

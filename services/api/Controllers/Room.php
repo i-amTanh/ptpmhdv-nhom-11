@@ -76,4 +76,16 @@ class Room extends RestControllers
         return $this->respond($data);
     }
 
+    public function getRoomPrice($id = null) {
+        if ($id === null) {
+            return $this->failValidationErrors('ID is required');
+        }
+        $model = new RoomModel();
+        $data = $model->getRoomPrice($id);
+        if (! $data) {
+            return $this->failNotFound('Room price not found');
+        }
+        return $this->respond($data);
+    }
+
 }

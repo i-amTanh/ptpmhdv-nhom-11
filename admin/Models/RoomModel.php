@@ -59,4 +59,9 @@ class RoomModel extends Model {
         return $this->where('resort_id', $resortId)->findAll();
     }
 
+    public function getRoomPrice($id)
+    {
+        return $this->where('id', $id)->findColumn('price_per_night');
+    }
+
 }

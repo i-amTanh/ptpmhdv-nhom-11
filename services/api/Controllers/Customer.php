@@ -4,7 +4,7 @@ namespace Api\Controllers;
 
 class Customer extends RestControllers
 {
-    protected $modelName = 'Admin\Models\CustomerModel';
+    protected $modelName = 'Admin\Models\AccountModel';
 
     public function index()
     {
@@ -18,7 +18,7 @@ class Customer extends RestControllers
         }
         $data = $this->model->find($id);
         if (!$data) {
-            return $this->failNotFound('Customer not found');
+            return $this->failNotFound('Account not found');
         }
         return $this->respond($data);
     }
@@ -30,7 +30,7 @@ class Customer extends RestControllers
             return $this->failValidationErrors($this->model->errors());
         }
 
-        return $this->respondCreated($data, 'Customer created');
+        return $this->respondCreated($data, 'Account created');
     }
 
     public function update($id = null)
@@ -40,13 +40,13 @@ class Customer extends RestControllers
         }
         $data = $this->request->getPost();
         if (! $this->model->find($id)) {
-            return $this->failNotFound('Customer not found');
+            return $this->failNotFound('Account not found');
         }
         if (! $this->model->update($id, $data)) {
             return $this->failValidationErrors($this->model->errors());
         }
 
-        return $this->respondUpdated($data, 'Customer updated');
+        return $this->respondUpdated($data, 'Account updated');
     }
 
     public function delete($id = null)
@@ -56,9 +56,9 @@ class Customer extends RestControllers
         }
         $data = $this->model->find($id);
         if (!$data) {
-            return $this->failNotFound('Customer not found');
+            return $this->failNotFound('Account not found');
         }
         $this->model->delete($id);
-        return $this->respondDeleted('Customer deleted');
+        return $this->respondDeleted('Account deleted');
     }
 }

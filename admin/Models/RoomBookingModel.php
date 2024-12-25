@@ -61,4 +61,9 @@ class RoomBookingModel extends Model {
             ->first();
     }
 
+    public function getRoomBookingByCustomerId($customerId)
+    {
+        return $this->where('customer_id', $customerId)->findAll();
+    }
+
 }

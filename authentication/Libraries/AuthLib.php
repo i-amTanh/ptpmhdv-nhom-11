@@ -6,35 +6,43 @@ use Auth\Models\AccountModel;
 
 class AuthLib extends AccountModel
 {
-    public string $username;
+    public string $email;
     public string $password;
+    public string $name;
 
     public function login(): bool
     {
-        $user = $this->where('username', $this->username)->first();
+        // Tìm người dùng theo email
+        $user = $this->where('email', $this->email)->first();
         if ($user) {
-            $password = password_hash($this->password, PASSWORD_BCRYPT);
-            if (password_verify($this->password, $user->password)) {
-                if ($user->status === self::STATUS_ACTIVE) {
-                    $session = session();
-                    $session->set([
-                        'user' => [
-                            'id'        => $user->id,
-                            'name'      => $user->username,
-                            'flag'      => $user->flag,
-                            'flag_name' => self::FLAGS[$user->flag],
-                        ],
-                    ]);
+            // Xác minh mật khẩu
+            if ( $this->password == $user->password ) {
+                // Thiết lập session
+                $session = session();
+                $session->set([
+                    'user' => [
+                        'id'        => $user->id,
+                        'email'     => $user->email,
+                        'flag'      => $user->flag,
+                    ],
+                ]);
 
-                    return true;
-                }
-
-                return false;
+                return true; // Đăng nhập thành công
             }
 
-            return false;
+            return false; // Sai mật khẩu
         }
 
-        return false;
+        return false; // Người dùng không tồn tại
+    }
+
+    public function createAcc(array $data): bool
+    {
+        $db  = \Config\Database::connect();
+        $sql = 'INSERT INTO accounts (name, phone_number, email, address, password, flag) VALUES (?, ?, ?, ?, ?, ?)';
+
+        $query = $db->query($sql, [$data['name'], $data['phone_number'], $data['email'], $data['address'], $data['password'], $data['flag']]);
+
+        return (bool) $query;
     }
 }

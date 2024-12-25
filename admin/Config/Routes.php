@@ -4,7 +4,7 @@ use Admin\Controllers\Employee;
 use Admin\Controllers\Home;
 use Admin\Controllers\Resort;
 use Admin\Controllers\Room;
-use Admin\Controllers\Customer;
+use Admin\Controllers\Account;
 use Admin\Controllers\RoomBooking;
 use CodeIgniter\Router\RouteCollection;
 
@@ -36,13 +36,13 @@ $routes->group('admin', static function ($routes) {
         $routes->post('view/(:num)', [Room::class, 'roomView/$1']);
     });
 
-    $routes->group('customer', static function ($routes) {
-        $routes->get('/', [Customer::class, 'customerIndex']);
-        $routes->get('create', [Customer::class, 'customerCreate']);
-        $routes->post('create', [Customer::class, 'customerCreate']);
-        $routes->get('update/(:num)', [Customer::class, 'customerUpdate/$1']);
-        $routes->post('update/(:num)', [Customer::class, 'customerUpdate/$1']);
-        $routes->post('', [Customer::class, 'customerDelete/$1']);
+    $routes->group('account', static function ($routes) {
+        $routes->get('/', [Account::class, 'accountIndex']);
+        $routes->get('create', [Account::class, 'accountCreate']);
+        $routes->post('create', [Account::class, 'accountCreate']);
+        $routes->get('update/(:num)', [Account::class, 'accountUpdate/$1']);
+        $routes->post('update/(:num)', [Account::class, 'accountUpdate/$1']);
+        $routes->post('', [Account::class, 'accountDelete/$1']);
     });
 
     $routes->group('employee', static function ($routes) {
