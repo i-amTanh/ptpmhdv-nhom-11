@@ -86,7 +86,6 @@ class Home extends BaseController {
                 'status'             => 'Paid',
                 'total_amount'       => $this->request->getPost('total-price'),
             ];
-            //$response = $this->createRoomBooking($data);
             session()->set('booking_data', [
                 'room_id' => $this->request->getPost('room_id'),
                 'check_in_date' => $this->request->getPost('check-in-date'),
@@ -197,7 +196,7 @@ class Home extends BaseController {
                 $this->createRoomBooking($data);
 
 
-                session()->setFlashdata('message', 'Booking created successfully!');
+                session()->setFlashdata('message', 'Payment Complete!');
                 return redirect()->to('/vi');
             } else {
                 // Thanh toán thất bại

@@ -18,25 +18,23 @@ class EmployeeModel extends Model {
     ];
 
     protected $validationRules = [
-        //'employee_name' => 'required|alpha_numeric_space',
-        //'position'      => 'required|alpha_numeric_space',
-        'phone_number'  => 'required|numeric|min_length[7]|max_length[20]',
+        'employee_name' => 'required',
+        'position'      => 'required',
+        'phone_number'  => 'required|numeric|min_length[9]|max_length[20]',
         'email'         => 'required|valid_email',
     ];
 
     protected $validationMessages = [
-//        'employee_name' => [
-//            'required'            => 'Employee name is required.',
-//            'alpha_numeric_space' => 'Employee name must be alphanumeric and space-separated.',
-//        ],
-//        'position' => [
-//            'required'            => 'Position is required.',
-//            'alpha_numeric_space' => 'Position must be alphanumeric and space-separated.',
-//        ],
+        'employee_name' => [
+            'required'            => 'Employee name is required.',
+        ],
+        'position' => [
+            'required'            => 'Position is required.',
+        ],
         'phone_number' => [
             'required'   => 'Phone number is required.',
             'numeric'    => 'Phone number must contain only numbers.',
-            'min_length' => 'Phone number must be at least 7 digits long.',
+            'min_length' => 'Phone number must be at least 9 digits long.',
             'max_length' => 'Phone number must not exceed 20 digits.',
         ],
         'email' => [

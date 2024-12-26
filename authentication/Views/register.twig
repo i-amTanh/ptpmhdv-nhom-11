@@ -3,11 +3,19 @@
 {% block content %}
 
     {% if errors %}
-        <ul>
-            {% for field, message in errors %}
-                <li>{{ field }}: {{ message }}</li>
-            {% endfor %}
-        </ul>
+        <div class="alert alert-danger d-flex align-items-start" role="alert">
+            <div class="me-3">
+                <i class="bi bi-exclamation-circle-fill fs-3"></i>
+            </div>
+            <div>
+                <h4 class="alert-heading mb-2">An error occurred!</h4>
+                <ul class="mb-0">
+                    {% for field, message in errors %}
+                        <li><strong>{{ field }}:</strong> {{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
     {% endif %}
 
     <section class="layout-pt-lg layout-pb-lg bg-blue-2">

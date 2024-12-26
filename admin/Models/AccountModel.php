@@ -27,7 +27,7 @@ class AccountModel extends Model {
 
     protected $validationRules = [
         'name' => 'required|alpha_numeric_space',
-        'phone_number'  => 'required|numeric|min_length[7]|max_length[20]',
+        'phone_number'  => 'required|numeric|min_length[9]|max_length[20]',
         'email'         => 'required|valid_email',
     ];
     protected $validationMessages = [
@@ -38,7 +38,7 @@ class AccountModel extends Model {
         'phone_number' => [
             'required'   => 'Phone number is required.',
             'numeric'    => 'Phone number must contain only numbers.',
-            'min_length' => 'Phone number must be at least 7 digits long.',
+            'min_length' => 'Phone number must be at least 9 digits long.',
             'max_length' => 'Phone number must not exceed 20 digits.',
         ],
         'email' => [

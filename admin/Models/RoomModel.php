@@ -2,7 +2,6 @@
 
 namespace Admin\Models;
 
-use Admin\Entities\Resort;
 use CodeIgniter\Model;
 
 class RoomModel extends Model {
@@ -22,7 +21,7 @@ class RoomModel extends Model {
 
     protected $validationRules = [
         'resort_id'       => 'required|integer',
-        'room_type'       => 'required|alpha_numeric_space',
+        'room_type'       => 'required',
         'price_per_night' => 'required|decimal',
         'availability'    => 'required|in_list[0,1]',
         'max_occupancy'   => 'required|integer',
@@ -35,7 +34,6 @@ class RoomModel extends Model {
         ],
         'room_type' => [
             'required'            => 'RoomModel type is required.',
-            'alpha_numeric_space' => 'RoomModel type must be alphanumeric and space-separated.',
         ],
         'price_per_night' => [
             'required' => 'Price per night is required.',
