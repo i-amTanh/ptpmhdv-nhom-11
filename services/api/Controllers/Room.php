@@ -88,4 +88,14 @@ class Room extends RestControllers
         return $this->respond($data);
     }
 
+    public function getRoomSearch($resort_id, $person)
+    {
+        $model = new RoomModel();
+        $data = $model->getRoomSearch($resort_id, $person);
+        if (! $data) {
+            return $this->failNotFound('Room not found');
+        }
+        return $this->respond($data);
+    }
+
 }

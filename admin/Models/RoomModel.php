@@ -62,4 +62,9 @@ class RoomModel extends Model {
         return $this->where('id', $id)->findColumn('price_per_night');
     }
 
+    public function getRoomSearch($resort_id, $person)
+    {
+        return $this->where('resort_id', $resort_id) ->where('max_occupancy >=', $person) ->findAll();
+    }
+
 }

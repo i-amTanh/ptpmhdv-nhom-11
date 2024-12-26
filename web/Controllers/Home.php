@@ -14,14 +14,23 @@ class Home extends BaseController {
         $message = session()->getFlashdata('message');
         $user = session()->get('user');
 
-        $data = [
+        if ($this->request->getMethod() === 'POST') {
+            $search = [
+                'resort_id'            => $this->request->getPost('location'),
+                'person'              => $this->request->getPost('person'),
+            ];
+            $data = $this->searchBooking($search);
+            return $this->render('booking', $data);
+        }
+
+        $datas = [
             'resorts' => $resort,
             'message' => $message,
             'session' => $_SESSION,
             'user' => $user
         ];
 
-        return $this->render('index', $data);
+        return $this->render('index', $datas);
     }
 
     public function detail($id): string
@@ -207,6 +216,22 @@ class Home extends BaseController {
             session()->setFlashdata('message', 'Invalid authentication.!');
             return redirect()->to('/vi');
         }
+    }
+
+    public function searchBooking($search)
+    {
+        $resortResponse = $this->fetchApi("http://pmhdv.local/api/resort/show/".$search['resort_id']);
+        $resort = json_decode($resortResponse);
+
+        $resortResponse = $this->fetchApi("http://pmhdv.local/api/room/search/".$search['resort_id']."/".$search['person']);
+        $rooms = json_decode($resortResponse);
+        $user = session()->get('user');
+        $data = [
+            'rooms' => $rooms,
+            'resort' => $resort,
+        ];
+
+        return $data;
     }
 
 

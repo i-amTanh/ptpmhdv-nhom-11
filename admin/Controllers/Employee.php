@@ -91,12 +91,4 @@ class Employee extends BaseController {
         }
     }
 
-    public function employeeView($id = false): string {
-        $model   = new EmployeeModel();
-        $employee = $model->find($id);
-
-
-        return $this->render('employeeView');
-    }
-
 }

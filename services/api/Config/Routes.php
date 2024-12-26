@@ -43,6 +43,7 @@ $routes->group('api', static function ($routes) {
         $routes->post('update/(:num)', [Room::class, 'update/$1']);
         $routes->post('delete/(:num)', [Room::class, 'delete/$1']);
         $routes->get('getroomsbyresortid/(:num)', [Room::class, 'getRoomByResortId/$1']);
+        $routes->get('search/(:num)/(:num)', [Room::class, 'getRoomSearch/$1/$2']);
     });
 
     $routes->group('roombooking', static function ($routes) {

@@ -55,11 +55,10 @@ class RoomBooking extends BaseController {
 
             if ($id) {
                 if ($model->delete($id)) {
-                    return $this->response->redirect('/admin/roomBooking');
+                    return $this->response->redirect('/admin/roombooking');
                 }
                 print_r($model->errors());
             }
         }
     }
-
 }
