@@ -20,7 +20,7 @@ class Home extends BaseController
         $model = new RoomBookingModel();
 
         $today = date('Y-m-d');
-        $week = date('W');
+        $week = date('YW');
         $month = date('m');
 
         // Lấy dữ liệu từ model

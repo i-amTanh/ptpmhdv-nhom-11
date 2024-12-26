@@ -36,14 +36,14 @@ class RoomBookingModel extends Model {
     // Lấy tổng số đặt phòng trong tuần
     public function getTotalBookingsByWeek($week)
     {
-        return $this->where('WEEK(check_in_date)', $week)->countAllResults();
+        return $this->where('YEARWEEK(check_in_date, 1)', $week)->countAllResults();
     }
 
     // Lấy tổng doanh thu trong tuần
     public function getTotalRevenueByWeek($week)
     {
         return $this->selectSum('total_amount', 'total_amount')
-            ->where('WEEK(check_in_date)', $week)
+            ->where('YEARWEEK(check_in_date, 1)', $week)
             ->first();
     }
 
