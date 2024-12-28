@@ -1,6 +1,6 @@
 <?php
 
-use Api\Controllers\Customer;
+use Api\Controllers\Account;
 use Api\Controllers\Employee;
 use Api\Controllers\Resort;
 use Api\Controllers\Room;
@@ -19,12 +19,12 @@ $routes->group('api', static function ($routes) {
         $routes->post('delete/(:num)', [Resort::class, 'delete/$1']);
     });
 
-    $routes->group('customer', static function ($routes) {
-        $routes->get('/', [Customer::class, 'index']);
-        $routes->get('show/(:num)', [Customer::class, 'show/$1']);
-        $routes->post('create', [Customer::class, 'create']);
-        $routes->post('update/(:num)', [Customer::class, 'update/$1']);
-        $routes->post('delete/(:num)', [Customer::class, 'delete/$1']);
+    $routes->group('account', static function ($routes) {
+        $routes->get('/', [Account::class, 'index']);
+        $routes->get('show/(:num)', [Account::class, 'show/$1']);
+        $routes->post('create', [Account::class, 'create']);
+        $routes->post('update/(:num)', [Account::class, 'update/$1']);
+        $routes->post('delete/(:num)', [Account::class, 'delete/$1']);
     });
 
     $routes->group('employee', static function ($routes) {

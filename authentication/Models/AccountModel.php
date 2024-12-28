@@ -11,7 +11,7 @@ class AccountModel extends Model
     final public const int FLAG_CUSTOMER    = 1;
     final public const array FLAGS         = [
         '0' => 'Administrator',
-        '1' => 'Customer',
+        '1' => 'Account',
     ];
 
     protected $table = 'accounts';

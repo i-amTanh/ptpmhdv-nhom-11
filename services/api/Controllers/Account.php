@@ -2,7 +2,7 @@
 
 namespace Api\Controllers;
 
-class Customer extends RestControllers
+class Account extends RestControllers
 {
     protected $modelName = 'Admin\Models\AccountModel';
 

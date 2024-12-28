@@ -39,7 +39,7 @@
                                     <td>{{ account.email }}</td>
                                     <td>{{ account.address }}</td>
                                     <td>{{ account.password }}</td>
-                                    <td>{{ account.flag == 1 ? 'Customer' : 'Admin' }}</td>
+                                    <td>{{ account.flag == 1 ? 'Account' : 'Admin' }}</td>
                                     <td>
                                         <a href="/admin/account/update/{{ account.id }}" title="Chỉnh sửa"><i class="fa fa-pen"></i> </a>
                                         <form method="post" id="delete-form-{{ account.id }}">
